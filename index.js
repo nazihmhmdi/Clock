@@ -47,7 +47,7 @@
         greet = 'Good Evening';
 
     document.getElementById('lblGreetings').innerHTML =
-        '<b>' + greet + '</b> and welcome to Encodedna.com!';
+        '<b>' + greet + '</b> and welcome !';
 
 
 // clock
