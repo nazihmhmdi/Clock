@@ -47,31 +47,62 @@
         greet = 'Good Evening';
 
     document.getElementById('lblGreetings').innerHTML =
-        '<b>' + greet + '</b> and welcome !';
+        '<b>' + greet + '</b> and welcome, piraa!';
 
 
 // clock
 // Javascript is used to set the clock to your computer time.
 
-var currentSec = getSecondsToday();
+// var currentSec = getSecondsToday();
 
-var seconds = (currentSec / 60) % 1;
-var minutes = (currentSec / 3600) % 1;
-var hours = (currentSec / 43200) % 1;
+// var seconds = (currentSec / 60) % 1;
+// var minutes = (currentSec / 3600) % 1;
+// var hours = (currentSec / 43200) % 1;
 
-setTime(60 * seconds, "second");
-setTime(3600 * minutes, "minute");
-setTime(43200 * hours, "hour");
+// setTime(60 * seconds, "second");
+// setTime(3600 * minutes, "minute");
+// setTime(43200 * hours, "hour");
 
-function setTime(left, hand) {
-  $(".clock__" + hand).css("animation-delay", "" + left * -1 + "s");
+// function setTime(left, hand) {
+//   $(".clock__" + hand).css("animation-delay", "" + left * -1 + "s");
+// }
+
+// function getSecondsToday() {
+//   let now = new Date();
+
+//   let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+//   let diff = now - today; 
+//   return Math.round(diff / 1000);
+// }
+//finish
+
+// START CLOCK SCRIPT
+
+Number.prototype.pad = function(n) {
+  for (var r = this.toString(); r.length < n; r = 0 + r);
+  return r;
+};
+
+function updateClock() {
+  var now = new Date();
+  var milli = now.getMilliseconds(),
+    sec = now.getSeconds(),
+    min = now.getMinutes(),
+    hou = now.getHours(),
+    mo = now.getMonth(),
+    dy = now.getDate(),
+    yr = now.getFullYear();
+  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var tags = ["mon", "d", "y", "h", "m", "s", "mi"],
+    corr = [months[mo], dy, yr, hou.pad(2), min.pad(2), sec.pad(2), milli];
+  for (var i = 0; i < tags.length; i++)
+    document.getElementById(tags[i]).firstChild.nodeValue = corr[i];
 }
 
-function getSecondsToday() {
-  let now = new Date();
-
-  let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
-  let diff = now - today; 
-  return Math.round(diff / 1000);
+function initClock() {
+  updateClock();
+  window.setInterval("updateClock()", 1);
 }
+
+// END CLOCK SCRIPT
